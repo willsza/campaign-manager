@@ -12,7 +12,7 @@ export class CampaignController {
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<Campaign[]> {
     return this.campaignService.findAll();
   }
 
