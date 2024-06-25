@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CampaignModule } from './campaign/campaign.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AppService } from './app.service';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    CampaignModule,
   ],
   controllers: [AppController],
   providers: [AppService],
