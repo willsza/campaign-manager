@@ -38,7 +38,7 @@ export class CampaignController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.campaignService.remove(+id);
+  remove(@Param('id') id: number): Promise<void> {
+    return this.campaignService.remove(id);
   }
 }

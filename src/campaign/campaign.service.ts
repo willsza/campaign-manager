@@ -35,7 +35,9 @@ export class CampaignService {
     return this.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} campaign`;
+  async remove(id: number): Promise<void> {
+    const campaign = await this.findOne(id);
+    campaign.isDeleted = true;
+    await this.campaignRepository.save(campaign);
   }
 }
