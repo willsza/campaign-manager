@@ -1,11 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCampaignDto } from './dto/create-campaign.dto';
-import { UpdateCampaignDto } from './dto/update-campaign.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Campaign } from './entities/campaign.entity';
 
 @Injectable()
 export class CampaignService {
-  create(createCampaignDto: CreateCampaignDto) {
-    return 'This action adds a new campaign';
+  constructor(
+    @InjectRepository(Campaign)
+    private campaignRepository: Repository<Campaign>,
+  ) {}
+
+  create(campaign: Partial<Campaign>): Promise<Campaign> {
+    const newCampaign = this.campaignRepository.create(campaign);
+    return this.campaignRepository.save(newCampaign);
   }
 
   findAll() {
@@ -16,9 +23,9 @@ export class CampaignService {
     return `This action returns a #${id} campaign`;
   }
 
-  update(id: number, updateCampaignDto: UpdateCampaignDto) {
-    return `This action updates a #${id} campaign`;
-  }
+  // update(id: number, updateCampaignDto: UpdateCampaignDto) {
+  //   return `This action updates a #${id} campaign`;
+  // }
 
   remove(id: number) {
     return `This action removes a #${id} campaign`;
