@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CampaignService } from './campaign.service';
 import { Campaign } from './entities/campaign.entity';
 
@@ -21,13 +29,13 @@ export class CampaignController {
     return this.campaignService.findOne(id);
   }
 
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateCampaignDto: UpdateCampaignDto,
-  // ) {
-  //   return this.campaignService.update(+id, updateCampaignDto);
-  // }
+  @Put(':id')
+  update(
+    @Param('id') id: number,
+    @Body() campaign: Partial<Campaign>,
+  ): Promise<Campaign> {
+    return this.campaignService.update(id, campaign);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

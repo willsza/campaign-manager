@@ -29,8 +29,10 @@ export class CampaignService {
     return campaign;
   }
 
-  update(id: number) {
-    return `This action updates a #${id} campaign`;
+  async update(id: number, campaign: Partial<Campaign>): Promise<Campaign> {
+    await this.findOne(id);
+    await this.campaignRepository.update(id, campaign);
+    return this.findOne(id);
   }
 
   remove(id: number) {
