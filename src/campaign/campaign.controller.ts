@@ -17,8 +17,8 @@ export class CampaignController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.campaignService.findOne(+id);
+  findOne(@Param('id') id: number): Promise<Campaign> {
+    return this.campaignService.findOne(id);
   }
 
   // @Patch(':id')

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Campaign } from './entities/campaign.entity';
@@ -19,8 +19,14 @@ export class CampaignService {
     return this.campaignRepository.find({ where: { isDeleted: false } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} campaign`;
+  async findOne(id: number): Promise<Campaign> {
+    const campaign = await this.campaignRepository.findOne({ where: { id } });
+
+    if (!campaign || campaign.isDeleted) {
+      throw new NotFoundException('Campaign not found');
+    }
+
+    return campaign;
   }
 
   update(id: number) {
