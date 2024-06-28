@@ -23,10 +23,10 @@ export class Campaign {
   dataFim: Date;
 
   @Column()
-  status: string;
-
-  @Column()
   categoria: string;
+
+  @Column({ default: 'ativa' })
+  status: string;
 
   @Column({ default: false })
   isDeleted: boolean;
