@@ -3,8 +3,8 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Category } from 'src/category/entities/category.entity';
-import { ValidationException } from 'src/common/exceptions/business.exception';
+import { Category } from '../category/entities/category.entity';
+import { ValidationException } from '../common/exceptions/business.exception';
 import { CreateCampaignDto } from './dto/create-campaign.dto';
 import { UpdateCampaignDto } from './dto/update-campaign.dto';
 import { Campaign } from './entities/campaign.entity';

@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { CampaignStatus } from 'src/campaign/enums/status.enum';
-import { Category } from 'src/category/entities/category.entity';
+import { Category } from '../../category/entities/category.entity';
+import { CampaignStatus } from '../enums/status.enum';
 
 @Entity()
 export class Campaign {

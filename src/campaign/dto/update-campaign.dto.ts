@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { IsEnum } from 'class-validator';
 
-import { CampaignStatus } from 'src/campaign/enums/status.enum';
+import { CampaignStatus } from '../enums/status.enum';
 import { CreateCampaignDto } from './create-campaign.dto';
 
 export class UpdateCampaignDto extends PartialType(CreateCampaignDto) {
