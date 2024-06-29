@@ -4,6 +4,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { CampaignStatus } from '../enums/status.enum';
 
 @Entity()
 export class Campaign {
@@ -25,8 +26,12 @@ export class Campaign {
   @Column()
   categoria: string;
 
-  @Column({ default: 'ativa' })
-  status: string;
+  @Column({
+    type: 'enum',
+    enum: CampaignStatus,
+    default: CampaignStatus.ATIVA,
+  })
+  status: CampaignStatus;
 
   @Column({ default: false })
   isDeleted: boolean;
