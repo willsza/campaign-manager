@@ -22,7 +22,7 @@ export class CampaignService {
       where: { id: categoryId },
     });
 
-    if (!category) {
+    if (!category || !categoryId) {
       throw new NotFoundException('Category not found');
     }
 

@@ -4,8 +4,7 @@ content-type: application/json
 {
   "nome": "Campanha 10",
   "dataInicio": "2024-07-08T00:00:00.000Z",
-  "dataFim": "2024-08-08T23:59:59.999Z",
-  "categoria": "categoria5"
+  "dataFim": "2024-08-08T23:59:59.999Z"
 }
 
 ###
@@ -39,3 +38,6 @@ content-type: application/json
 
 ###
 GET http://localhost:3001/categories HTTP/1.1
+
+###
+GET http://localhost:3001/categories/1 HTTP/1.1
