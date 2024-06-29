@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -7,6 +8,8 @@ import { ValidationException } from 'src/common/exceptions/business.exception';
 import { CreateCampaignDto } from './dto/create-campaign.dto';
 import { UpdateCampaignDto } from './dto/update-campaign.dto';
 import { Campaign } from './entities/campaign.entity';
+import { CampaignStatus } from './enums/status.enum';
+
 @Injectable()
 export class CampaignService {
   constructor(
@@ -99,5 +102,25 @@ export class CampaignService {
     const campaign = await this.findOne(id);
     campaign.isDeleted = true;
     await this.campaignRepository.save(campaign);
+  }
+
+  @Cron(CronExpression.EVERY_MINUTE)
+  async updateAllCampaignStatuses(): Promise<void> {
+    const campaigns = await this.campaignRepository.find({
+      where: { isDeleted: false },
+    });
+
+    const now = new Date();
+
+    for (const campaign of campaigns) {
+      if (
+        new Date(campaign.dataFim) < now &&
+        campaign.status !== CampaignStatus.EXPIRADA
+      ) {
+        campaign.status = CampaignStatus.EXPIRADA;
+      }
+    }
+
+    await this.campaignRepository.save(campaigns);
   }
 }
