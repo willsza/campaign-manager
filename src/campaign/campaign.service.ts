@@ -31,7 +31,18 @@ export class CampaignService {
   }
 
   async create(createCampaignDto: CreateCampaignDto): Promise<Campaign> {
-    const { categoryId, ...campaignData } = createCampaignDto;
+    const { categoryId, dataInicio, dataFim, ...campaignData } =
+      createCampaignDto;
+
+    if (dataInicio < new Date()) {
+      throw new Error('Data de início não pode ser menor que a data atual.');
+    }
+
+    if (dataFim <= dataInicio) {
+      throw new Error(
+        'Data de fim não pode ser menor ou igual a data de início.',
+      );
+    }
 
     const category = await this.categoryRepository.findOne({
       where: { id: categoryId },
@@ -52,6 +63,18 @@ export class CampaignService {
     id: number,
     updateCampaignDto: UpdateCampaignDto,
   ): Promise<Campaign> {
+    const { dataInicio, dataFim } = updateCampaignDto;
+
+    if (dataInicio < new Date()) {
+      throw new Error('Data de início não pode ser menor que a data atual.');
+    }
+
+    if (dataFim <= dataInicio) {
+      throw new Error(
+        'Data de fim não pode ser menor ou igual a data de início.',
+      );
+    }
+
     const campaign = await this.findOne(id);
 
     if (updateCampaignDto.categoryId) {
