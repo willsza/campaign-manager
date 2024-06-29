@@ -8,9 +8,9 @@ import {
   Put,
 } from '@nestjs/common';
 
-import { CreateCategoryDto } from 'src/category/dto/create-category.dto';
-import { Category } from 'src/category/entities/category.entity';
 import { CategoryService } from './category.service';
+import { CreateCategoryDto } from './dto/create-category.dto';
+import { Category } from './entities/category.entity';
 
 @Controller('categories')
 export class CategoryController {

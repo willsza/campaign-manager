@@ -8,5 +8,5 @@ export class UpdateCampaignDto extends PartialType(CreateCampaignDto) {
   @IsEnum(CampaignStatus, {
     message: 'Status inválido. Deve ser ativa, pausada ou expirada.',
   })
-  status: CampaignStatus;
+  status?: CampaignStatus;
 }
