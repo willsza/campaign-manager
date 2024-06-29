@@ -4,6 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
 
 describe('CategoryService', () => {
@@ -87,7 +88,7 @@ describe('CategoryService', () => {
 
   describe('update', () => {
     it('should update and return the category', async () => {
-      const updateDto: Partial<CreateCategoryDto> = {
+      const updateDto: UpdateCategoryDto = {
         name: 'Updated Category',
       };
 
