@@ -124,10 +124,10 @@ describe('CampaignService', () => {
   describe('update', () => {
     it('should update and return a campaign', async () => {
       const updateDto = {
-        dataInicio: new Date(Date.now() + 1000),
+        dataInicio: new Date(Date.now() + 24),
         dataFim: new Date(Date.now() + 10000),
         categoryId: 1,
-      } as UpdateCampaignDto;
+      };
 
       const category = { id: 1 } as Category;
       const campaign = { id: 1, isDeleted: false, category } as Campaign;
