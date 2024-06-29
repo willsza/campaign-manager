@@ -8,20 +8,14 @@ import {
   Put,
 } from '@nestjs/common';
 
-import { CreateCampaignDto } from 'src/campaign/dto/create-campaign.dto';
 import { CampaignService } from './campaign.service';
+import { CreateCampaignDto } from './dto/create-campaign.dto';
+import { UpdateCampaignDto } from './dto/update-campaign.dto';
 import { Campaign } from './entities/campaign.entity';
 
 @Controller('campaigns')
 export class CampaignController {
   constructor(private readonly campaignService: CampaignService) {}
-
-  @Post()
-  async create(
-    @Body() createCampaignDto: CreateCampaignDto,
-  ): Promise<Campaign> {
-    return this.campaignService.create(createCampaignDto);
-  }
 
   @Get()
   findAll(): Promise<Campaign[]> {
@@ -33,12 +27,19 @@ export class CampaignController {
     return this.campaignService.findOne(id);
   }
 
+  @Post()
+  async create(
+    @Body() createCampaignDto: CreateCampaignDto,
+  ): Promise<Campaign> {
+    return this.campaignService.create(createCampaignDto);
+  }
+
   @Put(':id')
   update(
     @Param('id') id: number,
-    @Body() campaign: Partial<Campaign>,
+    @Body() updateCampaignDto: UpdateCampaignDto,
   ): Promise<Campaign> {
-    return this.campaignService.update(id, campaign);
+    return this.campaignService.update(id, updateCampaignDto);
   }
 
   @Delete(':id')
