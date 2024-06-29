@@ -1,6 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+import { Category } from 'src/category/entities/category.entity';
+import { CreateCampaignDto } from './dto/create-campaign.dto';
 import { Campaign } from './entities/campaign.entity';
 
 @Injectable()
@@ -8,10 +11,25 @@ export class CampaignService {
   constructor(
     @InjectRepository(Campaign)
     private campaignRepository: Repository<Campaign>,
+    @InjectRepository(Category)
+    private categoryRepository: Repository<Category>,
   ) {}
 
-  create(campaign: Partial<Campaign>): Promise<Campaign> {
-    const newCampaign = this.campaignRepository.create(campaign);
+  async create(createCampaignDto: CreateCampaignDto): Promise<Campaign> {
+    const { categoryId, ...campaignData } = createCampaignDto;
+
+    const category = await this.categoryRepository.findOne({
+      where: { id: categoryId },
+    });
+
+    if (!category) {
+      throw new NotFoundException('Category not found');
+    }
+
+    const newCampaign = this.campaignRepository.create({
+      ...campaignData,
+      category,
+    });
     return this.campaignRepository.save(newCampaign);
   }
 

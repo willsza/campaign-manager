@@ -28,3 +28,14 @@ content-type: application/json
 
 ###
 DELETE http://localhost:3001/campaigns/5 HTTP/1.1
+
+###
+POST http://localhost:3001/categories HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Categoria 3"
+}
+
+###
+GET http://localhost:3001/categories HTTP/1.1

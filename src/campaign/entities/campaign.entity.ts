@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { CampaignStatus } from '../enums/status.enum';
+
+import { CampaignStatus } from 'src/campaign/enums/status.enum';
+import { Category } from 'src/category/entities/category.entity';
 
 @Entity()
 export class Campaign {
@@ -23,9 +26,6 @@ export class Campaign {
   @Column()
   dataFim: Date;
 
-  @Column()
-  categoria: string;
-
   @Column({
     type: 'enum',
     enum: CampaignStatus,
@@ -35,4 +35,7 @@ export class Campaign {
 
   @Column({ default: false })
   isDeleted: boolean;
+
+  @ManyToOne(() => Category, (category) => category.campaigns, { eager: true })
+  category: Category;
 }

@@ -7,6 +7,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+
+import { CreateCampaignDto } from 'src/campaign/dto/create-campaign.dto';
 import { CampaignService } from './campaign.service';
 import { Campaign } from './entities/campaign.entity';
 
@@ -15,8 +17,10 @@ export class CampaignController {
   constructor(private readonly campaignService: CampaignService) {}
 
   @Post()
-  create(@Body() campaign: Partial<Campaign>): Promise<Campaign> {
-    return this.campaignService.create(campaign);
+  async create(
+    @Body() createCampaignDto: CreateCampaignDto,
+  ): Promise<Campaign> {
+    return this.campaignService.create(createCampaignDto);
   }
 
   @Get()
