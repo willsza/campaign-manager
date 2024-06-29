@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -33,6 +34,7 @@ export class Campaign {
   })
   status: CampaignStatus;
 
+  @Exclude()
   @Column({ default: false })
   isDeleted: boolean;
 

@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Campaign } from 'src/campaign/entities/campaign.entity';
@@ -13,6 +14,7 @@ export class Category {
   @OneToMany(() => Campaign, (campaign) => campaign.category)
   campaigns: Campaign[];
 
+  @Exclude()
   @Column({ default: false })
   isDeleted: boolean;
 }

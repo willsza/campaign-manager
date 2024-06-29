@@ -6,7 +6,9 @@ import {
   Param,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
+import { ClassSerializerInterceptor } from '@nestjs/common/serializer';
 
 import { CampaignService } from './campaign.service';
 import { CreateCampaignDto } from './dto/create-campaign.dto';
@@ -14,6 +16,7 @@ import { UpdateCampaignDto } from './dto/update-campaign.dto';
 import { Campaign } from './entities/campaign.entity';
 
 @Controller('campaigns')
+@UseInterceptors(ClassSerializerInterceptor)
 export class CampaignController {
   constructor(private readonly campaignService: CampaignService) {}
 
