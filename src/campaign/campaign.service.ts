@@ -70,11 +70,11 @@ export class CampaignService {
   ): Promise<Campaign> {
     const { dataInicio, dataFim } = updateCampaignDto;
 
-    if (dataInicio < new Date()) {
+    if (new Date(dataInicio) < new Date()) {
       throw new Error('Data de início não pode ser menor que a data atual.');
     }
 
-    if (dataFim <= dataInicio) {
+    if (new Date(dataFim) <= new Date(dataInicio)) {
       throw new Error(
         'Data de fim não pode ser menor ou igual a data de início.',
       );
