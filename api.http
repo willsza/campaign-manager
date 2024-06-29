@@ -3,7 +3,7 @@ content-type: application/json
 
 {
   "nome": "Campanha 30",
-  "dataInicio": "2024-07-08T00:00:00.000Z",
+  "dataInicio": "2024-08-08T23:59:59.999Z",
   "dataFim": "2024-08-08T23:59:59.999Z",
   "categoryId": 4
 }

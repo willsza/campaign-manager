@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Category } from 'src/category/entities/category.entity';
+import { ValidationException } from 'src/common/exceptions/business.exception';
 import { CreateCampaignDto } from './dto/create-campaign.dto';
 import { UpdateCampaignDto } from './dto/update-campaign.dto';
 import { Campaign } from './entities/campaign.entity';
-
 @Injectable()
 export class CampaignService {
   constructor(
@@ -34,13 +34,15 @@ export class CampaignService {
     const { categoryId, dataInicio, dataFim, ...campaignData } =
       createCampaignDto;
 
-    if (dataInicio < new Date()) {
-      throw new Error('Data de início não pode ser menor que a data atual.');
+    if (new Date(dataInicio) < new Date()) {
+      throw new ValidationException(
+        'Data de início não pode ser menor que a data atual.',
+      );
     }
 
-    if (dataFim <= dataInicio) {
-      throw new Error(
-        'Data de fim não pode ser menor ou igual a data de início.',
+    if (new Date(dataFim) <= new Date(dataInicio)) {
+      throw new ValidationException(
+        'Data de término não pode ser menor ou igual a data de início.',
       );
     }
 
