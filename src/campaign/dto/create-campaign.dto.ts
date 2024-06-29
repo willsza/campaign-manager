@@ -1,12 +1,4 @@
-import {
-  IsDateString,
-  IsEnum,
-  IsInt,
-  IsNotEmpty,
-  IsString,
-} from 'class-validator';
-
-import { CampaignStatus } from 'src/campaign/enums/status.enum';
+import { IsDateString, IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateCampaignDto {
   @IsNotEmpty({ message: 'Nome é obrigatório.' })
@@ -20,11 +12,6 @@ export class CreateCampaignDto {
   @IsNotEmpty({ message: 'DataFim é obrigatória.' })
   @IsDateString()
   dataFim: Date;
-
-  @IsEnum(CampaignStatus, {
-    message: 'Status inválido. Deve ser ativa, pausada ou expirada.',
-  })
-  status: CampaignStatus;
 
   @IsNotEmpty({
     message: 'CategoryId é obrigatória.',
