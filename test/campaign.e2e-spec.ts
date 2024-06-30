@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import * as request from 'supertest';
 import { Repository } from 'typeorm';
+
 import { AppModule } from '../src/app.module';
 import { Campaign } from '../src/campaign/entities/campaign.entity';
 
@@ -27,10 +28,6 @@ describe('CampaignController (e2e)', () => {
     await app.close();
   });
 
-  beforeEach(async () => {
-    await repository.clear();
-  });
-
   it('/campaigns (POST)', async () => {
     const campaign = {
       nome: 'Campaign 1',
@@ -52,22 +49,17 @@ describe('CampaignController (e2e)', () => {
   });
 
   it('/campaigns (GET)', async () => {
-    const campaign = {
-      nome: 'Campaign 1',
-      categoryId: 1,
-      dataInicio: new Date(),
-      dataFim: new Date(Date.now() + 10000),
-    };
-
-    await repository.save(campaign);
+    const campaigns = await repository.findAndCount({
+      where: { isDeleted: false },
+    });
 
     return request(app.getHttpServer())
       .get('/campaigns')
       .expect(200)
       .expect((response) => {
-        expect(response.body.length).toBe(1);
+        expect(response.body.length).toBe(campaigns[1]);
         expect(response.body[0]).toMatchObject({
-          nome: campaign.nome,
+          nome: campaigns[0][1].nome,
         });
       });
   });
