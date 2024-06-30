@@ -2,9 +2,9 @@ POST http://localhost:3001/campaigns HTTP/1.1
 content-type: application/json
 
 {
-  "nome": "Campanha 30",
-  "dataInicio": "2024-08-08T23:59:59.999Z",
-  "dataFim": "2024-08-08T23:59:59.999Z",
+  "nome": "Campanha 32",
+  "dataInicio": "2024-08-09T00:12:18.000Z",
+  "dataFim": "2024-09-01T00:12:18.000Z",
   "categoryId": 4
 }
 
