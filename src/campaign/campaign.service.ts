@@ -59,8 +59,11 @@ export class CampaignService {
 
     const newCampaign = this.campaignRepository.create({
       ...campaignData,
+      dataInicio,
+      dataFim,
       category,
     });
+
     return this.campaignRepository.save(newCampaign);
   }
 
