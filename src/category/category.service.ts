@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -43,5 +44,15 @@ export class CategoryService {
     const category = await this.findOne(id);
     category.isDeleted = true;
     await this.categoryRepository.save(category);
+  }
+
+  async seed() {
+    for (let i = 0; i < 10; i++) {
+      const campaign = this.categoryRepository.create({
+        name: faker.lorem.words(3),
+      });
+
+      await this.categoryRepository.save(campaign);
+    }
   }
 }

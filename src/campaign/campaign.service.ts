@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -125,5 +126,22 @@ export class CampaignService {
     }
 
     await this.campaignRepository.save(campaigns);
+  }
+
+  async seed() {
+    for (let i = 0; i < 10; i++) {
+      const category = await this.categoryRepository.findOne({
+        where: { id: 1 },
+      });
+
+      const campaign = this.campaignRepository.create({
+        nome: faker.lorem.words(3),
+        dataInicio: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+        dataFim: new Date(Date.now() + 1000 * 60 * 60 * 24 * 14),
+        category,
+      });
+
+      await this.campaignRepository.save(campaign);
+    }
   }
 }
