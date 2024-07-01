@@ -1,73 +1,130 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Uma breve descrição do projeto, o que ele faz e por que ele é útil.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Tecnologias Utilizadas
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- **[NestJS](https://nestjs.com/)**: Um framework Node.js progressivo para a construção de aplicações eficientes e escaláveis do lado do servidor.
+- **[TypeORM](https://typeorm.io/)**: Um ORM (Object Relational Mapper) para TypeScript e JavaScript (ES7, ES6, ES5) que pode ser executado em plataformas Node.js, Browser, Cordova, PhoneGap, Ionic, React Native, NativeScript, Expo e Electron.
+- **[Docker](https://www.docker.com/)**: Plataforma para desenvolvimento, envio e execução de aplicações em containers, utilizada para prover o banco de dados.
 
-## Description
+## Pré-requisitos
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-## Installation
+- Você instalou a versão mais recente do `Node.js`.
+- Você tem um gerenciador de pacotes como `npm` ou `yarn` instalado.
+- Você tem o `Docker` instalado e configurado.
 
-```bash
-$ pnpm install
+## Instalação
+
+1. Clone o repositório
+
+    ```bash
+    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    ```
+
+2. Navegue até o diretório do projeto
+
+    ```bash
+    cd nome-do-repositorio
+    ```
+
+3. Instale as dependências
+
+    ```bash
+    npm install
+    # ou
+    yarn install
+    ```
+
+## Configuração
+
+Certifique-se de configurar suas variáveis de ambiente no arquivo `.env`, conforme o exemplo abaixo:
+
+```
+# Exemplo de variáveis de ambiente
+DB_TYPE=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=usuario
+DB_PASSWORD=senha
+DB_DATABASE=nome-do-banco
 ```
 
-## Running the app
+## Configuração do Docker
 
-```bash
-# development
-$ pnpm run start
+Utilize o arquivo `docker-compose.yml` incluído no projeto para configurar e iniciar o banco de dados com Docker. O arquivo pode se parecer com o exemplo abaixo:
 
-# watch mode
-$ pnpm run start:dev
+```yaml
+version: '3.8'
 
-# production mode
-$ pnpm run start:prod
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: nome-do-banco
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: senha
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+```
+Para iniciar o container do banco de dados, execute:
+
+```
+docker-compose up -d
+```
+## Uso
+
+Para iniciar o servidor de desenvolvimento, execute:
+
+```
+npm run start:dev
+# ou
+yarn start:dev
+```
+Abra http://localhost:3001 com seu navegador para ver o resultado.
+
+## Estrutura do Projeto
+Aqui está a estrutura básica do projeto:
+
+```
+/nome-do-repositorio
+├── src
+│   ├── modules
+│   │   └── ...
+│   ├── entities
+│   │   └── ...
+│   ├── controllers
+│   │   └── ...
+│   ├── services
+│   │   └── ...
+│   ├── main.ts
+│   └── ...
+├── .env
+├── docker-compose.yml
+├── ormconfig.json
+├── package.json
+└── tsconfig.json
 ```
 
-## Test
+## Rodando os Testes
 
-```bash
-# unit tests
-$ pnpm run test
+Para rodar os testes, utilize o seguinte comando:
 
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+```
+npm run test
+# ou
+yarn test
 ```
 
-## Support
+Para rodar os testes com cobertura, utilize:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+```
+npm run test:cov
+# ou
+yarn test:cov
+```
