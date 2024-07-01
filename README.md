@@ -32,9 +32,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 3. Instale as dependências
 
     ```bash
-    npm install
-    # ou
-    yarn install
+    pnpm install
     ```
 
 ## Configuração
@@ -73,19 +71,20 @@ services:
 volumes:
   pgdata:
 ```
-Para iniciar o container do banco de dados, execute:
 
-```
-docker-compose up -d
-```
 ## Uso
 
-Para iniciar o servidor de desenvolvimento, execute:
+Para iniciar o projeto, execute:
 
 ```
+# Sobe container para o banco de dados
+docker-compose up -d
+
+# Adiciona dados iniciais ao banco de dados
+npm run seed 
+
+# Inicia a aplicação
 npm run start:dev
-# ou
-yarn start:dev
 ```
 Abra http://localhost:3001 com seu navegador para ver o resultado.
 
