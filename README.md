@@ -1,4 +1,5 @@
-Uma breve descrição do projeto, o que ele faz e por que ele é útil.
+Este projeto utiliza **NestJS** como framework principal para a construção de uma aplicação eficiente e escalável do lado do servidor. **TypeORM** é empregado para o mapeamento objeto-relacional, facilitando a interação com o banco de dados e garantindo uma integração fluida com **NestJS**. O **Docker** é utilizado para prover o banco de dados, assegurando um ambiente consistente e fácil de configurar para desenvolvimento e produção. A utilização dessas tecnologias proporciona uma base sólida para o desenvolvimento rápido e eficiente de aplicações robustas. Além disso, a implementação de uma boa cobertura de testes é essencial para garantir a confiabilidade e a estabilidade da aplicação, permitindo identificar e corrigir erros antes que eles afetem o ambiente de produção.
+
 
 ## Tecnologias Utilizadas
 
