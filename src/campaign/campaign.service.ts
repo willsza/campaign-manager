@@ -107,7 +107,7 @@ export class CampaignService {
     await this.campaignRepository.save(campaign);
   }
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async updateAllCampaignStatuses(): Promise<void> {
     const campaigns = await this.campaignRepository.find({
       where: { isDeleted: false },
